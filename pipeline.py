@@ -5,18 +5,16 @@ import pandas as pd
 
 def extract():
     data = {
-        "date": ["2024-01-01", "2024-01-02", "2024-01-03", "2024-01-04", "2024-01-05"],
-        "product": ["Arabica Blend", "Cold Brew", None, "Espresso Roast", "Arabica Blend"],
-        "region": ["Southeast", "Midwest", "West", "Southeast", None],
-        "units_sold": [120, 85, 200, None, 95],
-        "revenue": [2400.00, 1700.00, 4000.00, None, 1900.00]
+        "date": ["2024-01-01", "2024-01-02", "2024-01-03", "2024-01-04", "2024-01-05", "2024-01-06"],
+        "product": ["Arabica Blend", "Cold Brew", None, "Espresso Roast", "Arabica Blend", "Cold Brew"],
+        "region": ["Southeast", "Midwest", "West", "Southeast", None, "Midwest"],
+        "units_sold": [120, 85, 200, None, 95, 200],
+        "revenue": [2400.00, 1700.00, 4000.00, None, 1900.00, 4000.00]
     }
     df = pd.DataFrame(data)
     print("✓ Data extracted")
     print(df)
     return(df)
-
-extract()
 
 # ── TRANSFORM ─────────────────────────────────────────
 # Clean and validate the data
