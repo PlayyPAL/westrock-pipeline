@@ -1,4 +1,5 @@
 import pandas as pd
+import requests
 
 # ── EXTRACT ──────────────────────────────────────────
 # Simulates pulling raw sales data from a source system
@@ -16,10 +17,19 @@ def extract():
     print(df)
     return(df)
 
+# EXTRACT - Exchange Rate API
+def extract_exchange_rate():
+    url = "https://open.er-api.com/v6/latest/USD"
+    response = requests.get(url)
+    data = response.json()
+    myr_rate = data["rates"]["MYR"]
+    print(f"Live exchange rate fetched: 1 USD = {myr_rate} MYR")
+    return myr_rate
+
 # ── TRANSFORM ─────────────────────────────────────────
 # Clean and validate the data
 
-def transform(df):
+def transform(df, myr_rate):
     # Drop rows where critical fields are missing
     df = df.dropna(subset=["product", "units_sold", "revenue"])
     
@@ -28,12 +38,10 @@ def transform(df):
     
     # Add a new calculated column
     df["revenue_per_unit"] = df["revenue"] / df["units_sold"]
-    
+    df["revenue_myr"] = df["revenue"] * myr_rate  # Convert revenue to MYR using live exchange rate
     print("\n✓ Data transformed and cleaned")
     print(df)
     return df
-raw_data = extract()
-clean_data = transform(raw_data)
 
 # ── LOAD ──────────────────────────────────────────────
 # Save clean data to output
@@ -43,9 +51,6 @@ def load(df):
     df.to_csv(output_path, index=False)
     print(f"\n✓ Data loaded to {output_path}")
     print(f"  {len(df)} records written successfully")
-raw_data = extract()
-clean_data = transform(raw_data)
-load(clean_data)
 
 # SUMMARY REPORT
 def summarize(df):
@@ -62,6 +67,7 @@ def summarize(df):
     print("Average Revenue Per Unit:", round(df["revenue_per_unit"].mean(), 2))
     print("------------------------------")
 raw_data = extract()
-clean_data = transform(raw_data)
+myr_rate = extract_exchange_rate()
+clean_data = transform(raw_data, myr_rate)
 load(clean_data)
 summarize(clean_data)

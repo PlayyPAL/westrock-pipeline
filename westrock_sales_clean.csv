@@ -1,5 +1,5 @@
-date,product,region,units_sold,revenue,revenue_per_unit
-2024-01-01,Arabica Blend,Southeast,120.0,2400.0,20.0
-2024-01-02,Cold Brew,Midwest,85.0,1700.0,20.0
-2024-01-05,Arabica Blend,Unknown,95.0,1900.0,20.0
-2024-01-06,Cold Brew,Midwest,200.0,4000.0,20.0
+date,product,region,units_sold,revenue,revenue_per_unit,revenue_myr
+2024-01-01,Arabica Blend,Southeast,120.0,2400.0,20.0,9817.5792
+2024-01-02,Cold Brew,Midwest,85.0,1700.0,20.0,6954.118600000001
+2024-01-05,Arabica Blend,Unknown,95.0,1900.0,20.0,7772.2502
+2024-01-06,Cold Brew,Midwest,200.0,4000.0,20.0,16362.632000000001
